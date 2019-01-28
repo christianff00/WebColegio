@@ -35,10 +35,6 @@
         <button type="submit" class="btn btn-info"><?php echo get_phrase('manage_attendance'); ?></button>
     </div>
 
-    <div class="col-md-2" style="margin-top: 20px">
-        <button type="submit" class="btn btn-info"><?php echo get_phrase('show_report'); ?></button>
-    </div>
-
 </div>
 
 </div>

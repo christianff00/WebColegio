@@ -1,4 +1,4 @@
-<a href="javascript:;" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/librarian_add');" 
+<a href="javascript:;" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/attendance_detail_student');" 
     class="btn btn-primary pull-right">
         <i class="entypo-plus-circled"></i>
         <?php echo get_phrase('add_new_librarian');?>

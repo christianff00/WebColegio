@@ -63,9 +63,10 @@
                         <span><i class="entypo-dot"></i> <?php echo get_phrase('student_information'); ?></span>
                     </a>
                     <ul>
-                        <?php $classes = $this->db->get('class')->result_array();
-                            foreach ($classes as $row):
-                        ?>
+                        <?php
+                        $classes = $this->db->get('class')->result_array();
+                        foreach ($classes as $row):
+                            ?>
                             <li class="<?php if ($page_name == 'student_information' && $class_id == $row['class_id']) echo 'active'; ?>">
                                 <a href="<?php echo base_url(); ?>index.php?<?php echo $account_type; ?>/student_information/<?php echo $row['class_id']; ?>">
                                     <span><?php echo get_phrase('class'); ?> <?php echo $row['name']; ?></span>
@@ -95,29 +96,32 @@
                 <span><?php echo get_phrase('subject'); ?></span>
             </a>
             <ul>
-<?php $classes = $this->db->get('class')->result_array();
-foreach ($classes as $row):
-    ?>
+                <?php
+                $classes = $this->db->where('teacher_id', $this->session->userdata('login_user_id'))->get('class')->result_array();
+                foreach ($classes as $row):
+                    ?>
                     <li class="<?php if ($page_name == 'subject' && $class_id == $row['class_id']) echo 'active'; ?>">
                         <a href="<?php echo base_url(); ?>index.php?<?php echo $account_type; ?>/subject/<?php echo $row['class_id']; ?>">
                             <span><?php echo get_phrase('class'); ?> <?php echo $row['name']; ?></span>
                         </a>
                     </li>
-<?php endforeach; ?>
+                <?php endforeach; ?>
             </ul>
         </li>
 
         <!-- CLASS ROUTINE -->
-        <li class="<?php if ($page_name == 'class_routine' ||
-                                $page_name == 'class_routine_print_view')
-                                    echo 'opened active'; ?> ">
+        <li class="<?php
+        if ($page_name == 'class_routine' ||
+                $page_name == 'class_routine_print_view')
+            echo 'opened active';
+        ?> ">
             <a href="#">
                 <i class="entypo-target"></i>
                 <span><?php echo get_phrase('class_routine'); ?></span>
             </a>
             <ul>
                 <?php
-                $classes = $this->db->get('class')->result_array();
+                $classes = $this->db->where('teacher_id', $this->session->userdata('login_user_id'))->get('class')->result_array();
                 foreach ($classes as $row):
                     ?>
                     <li class="<?php if ($page_name == 'class_routine' && $class_id == $row['class_id']) echo 'active'; ?>">
@@ -129,7 +133,7 @@ foreach ($classes as $row):
             </ul>
         </li>
 
-		<!-- STUDY MATERIAL -->
+        <!-- STUDY MATERIAL -->
         <li class="<?php if ($page_name == 'study_material') echo 'active'; ?> ">
             <a href="<?php echo base_url(); ?>index.php?<?php echo $account_type; ?>/study_material">
                 <i class="entypo-book-open"></i>
@@ -146,29 +150,56 @@ foreach ($classes as $row):
         </li>
 
         <!-- DAILY ATTENDANCE -->
-        <li class="<?php if ($page_name == 'manage_attendance' ||
-                                $page_name == 'manage_attendance_view')
-                                    echo 'opened active'; ?> ">
+
+        <li class="<?php
+        if ($page_name == 'manage_attendance' ||
+                $page_name == 'manage_attendance_view' || $page_name == 'attendance_report' || $page_name == 'attendance_report_view')
+            echo 'opened active';
+        ?> ">
             <a href="#">
                 <i class="entypo-chart-area"></i>
-                <span><?php echo get_phrase('daily_attendance'); ?></span>
+                <span><?php echo get_phrase('attendance'); ?></span>
             </a>
             <ul>
-                <?php
-                $classes = $this->db->get('class')->result_array();
-                foreach ($classes as $row):
-                    ?>
-                    <li class="<?php if (($page_name == 'manage_attendance' || $page_name == 'manage_attendance_view') && $class_id == $row['class_id']) echo 'active'; ?>">
-                        <a href="<?php echo base_url(); ?>index.php?teacher/manage_attendance/<?php echo $row['class_id']; ?>">
-                            <span><?php echo get_phrase('class'); ?> <?php echo $row['name']; ?></span>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
+
+                <li class="<?php
+                if ($page_name == 'manage_attendance' ||
+                        $page_name == 'manage_attendance_view')
+                    echo 'opened active';
+                ?> ">
+                    <a href="#">
+                        <i class="entypo-dot"></i>
+                        <span><?php echo get_phrase('daily_attendance'); ?></span>
+                    </a>
+                    <ul>
+                        <?php
+                        $classes = $this->db->where('teacher_id', $this->session->userdata('login_user_id'))->get('class')->result_array();
+                        foreach ($classes as $row):
+                            ?>
+                            <li class="<?php if (($page_name == 'manage_attendance' || $page_name == 'manage_attendance_view') && $class_id == $row['class_id']) echo 'active'; ?>">
+                                <a href="<?php echo base_url(); ?>index.php?teacher/manage_attendance/<?php echo $row['class_id']; ?>">
+                                    <span><?php echo get_phrase('class'); ?> <?php echo $row['name']; ?></span>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+
+            </ul>
+            <ul>
+
+                <li class="<?php if (( $page_name == 'attendance_report' || $page_name == 'attendance_report_view')) echo 'active'; ?>">
+                    <a href="<?php echo base_url(); ?>index.php?teacher/attendance_report">
+                        <span><i class="entypo-dot"></i><?php echo get_phrase('attendance_report'); ?></span>
+                    </a>
+                </li>
+
             </ul>
         </li>
 
+
         <!-- EXAMS -->
-        <li class="<?php if ($page_name == 'marks_manage' || $page_name == 'marks_manage_view' || $page_name == 'question_paper') echo 'opened active';?> ">
+        <li class="<?php if ($page_name == 'marks_manage' || $page_name == 'marks_manage_view' || $page_name == 'question_paper') echo 'opened active'; ?> ">
             <a href="#">
                 <i class="entypo-graduation-cap"></i>
                 <span><?php echo get_phrase('exam'); ?></span>

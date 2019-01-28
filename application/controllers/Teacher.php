@@ -706,8 +706,59 @@ else{
         $this->session->set_flashdata('flash_message' , get_phrase('attendance_updated'));
         redirect(base_url().'index.php?teacher/manage_attendance_view/'.$class_id.'/'.$section_id.'/'.$timestamp , 'refresh');
     }
+    
+    //admin
+    function attendance_report() {
+         $page_data['month']        = date('m');
+         $page_data['page_name']    = 'attendance_report';
+         $page_data['page_title']   = get_phrase('attendance_report');
+         $this->load->view('backend/index',$page_data);
+     }
+     
+    function attendance_report_selector()
+    {   if($this->input->post('class_id') == '' || $this->input->post('sessional_year') == '') {
+            $this->session->set_flashdata('error_message' , get_phrase('please_make_sure_class_and_sessional_year_are_selected'));
+            redirect(base_url() . 'index.php?teacher/attendance_report', 'refresh');
+        }
+        $data['class_id']       = $this->input->post('class_id');
+        $data['section_id']     = $this->input->post('section_id');
+        $data['month']          = $this->input->post('month');
+        $data['sessional_year'] = $this->input->post('sessional_year');
+        redirect(base_url() . 'index.php?teacher/attendance_report_view/' . $data['class_id'] . '/' . $data['section_id'] . '/' . $data['month'] . '/' . $data['sessional_year'], 'refresh');
+    }
+    
+    function attendance_report_view($class_id = '', $section_id = '', $month = '', $sessional_year = '')
+     {
+         if($this->session->userdata('teacher_login')!=1)
+            redirect(base_url() , 'refresh');
 
+        $class_name                     = $this->db->get_where('class', array('class_id' => $class_id))->row()->name;
+        $section_name                   = $this->db->get_where('section', array('section_id' => $section_id))->row()->name;
+        $page_data['class_id']          = $class_id;
+        $page_data['section_id']        = $section_id;
+        $page_data['month']             = $month;
+        $page_data['sessional_year']    = $sessional_year;
+        $page_data['page_name']         = 'attendance_report_view';
+        $page_data['page_title']        = get_phrase('attendance_report_of_class') . ' ' . $class_name . ' : ' . get_phrase('section') . ' ' . $section_name;
+        $this->load->view('backend/index', $page_data);
+     }
+     
+     function attendance_report_print_view($class_id ='' , $section_id = '' , $month = '', $sessional_year = '') {
+          if ($this->session->userdata('teacher_login') != 1)
+            redirect(base_url(), 'refresh');
 
+        $page_data['class_id']          = $class_id;
+        $page_data['section_id']        = $section_id;
+        $page_data['month']             = $month;
+        $page_data['sessional_year']    = $sessional_year;
+        $this->load->view('backend/teacher/attendance_report_print_view' , $page_data);
+    }
+
+    function get_section($class_id) {
+          $page_data['class_id'] = $class_id;
+          $this->load->view('backend/teacher/manage_attendance_section_holder' , $page_data);
+    }
+    
     /**********MANAGE LIBRARY / BOOKS********************/
     function book($param1 = '', $param2 = '', $param3 = '')
     {

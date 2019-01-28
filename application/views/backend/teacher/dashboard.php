@@ -24,18 +24,18 @@
     
 	<div class="col-md-4">
 		<div class="row">
-            <div class="col-md-12">
-            
-                <div class="tile-stats tile-red">
-                    <div class="icon"><i class="fa fa-group"></i></div>
-                    <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('student');?>" 
-                    		data-postfix="" data-duration="1500" data-delay="0">0</div>
-                    
-                    <h3><?php echo get_phrase('student');?></h3>
-                   <p>Total students</p>
-                </div>
-                
-            </div>
+                    <div class="col-md-12">
+
+                        <div class="tile-stats tile-red">
+                            <div class="icon"><i class="fa fa-group"></i></div>
+                            <div class="num" data-start="0" data-end="<?php echo $this->db->count_all('student'); ?>" 
+                                 data-postfix="" data-duration="1500" data-delay="0">0</div>
+
+                            <h3><?php echo get_phrase('student'); ?></h3>
+                            <p>Total students</p>
+                        </div>
+
+                    </div>
             <div class="col-md-12">
             
                 <div class="tile-stats tile-green">

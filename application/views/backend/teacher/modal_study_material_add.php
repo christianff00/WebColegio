@@ -85,6 +85,10 @@
                         </select>
                     </div>
                 </div>
+                
+                <div>
+                    <input type="hidden" id="teacher_id" value="<?php $this->session->userdata('login_user_id')?>">
+                </div>
 
                 <div class="col-sm-3 control-label col-sm-offset-2">
                     <button type="submit" id = "submit" class="btn btn-success"><?php echo get_phrase('upload'); ?></button>
