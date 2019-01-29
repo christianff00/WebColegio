@@ -5,7 +5,7 @@
 	$account_type       =	$this->session->userdata('login_type');
 	$skin_colour        =   $this->db->get_where('settings' , array('type'=>'skin_colour'))->row()->description;
 	$active_sms_service =   $this->db->get_where('settings' , array('type'=>'active_sms_service'))->row()->description;
-	$running_year 		=   $this->db->get_where('settings' , array('type'=>'running_year'))->row()->description;
+	$running_year       =   $this->db->get_where('settings' , array('type'=>'running_year'))->row()->description;
 	?>
 <!DOCTYPE html>
 <html lang="en" dir="<?php if ($text_align == 'right-to-left') echo 'rtl';?>">

@@ -313,6 +313,14 @@ class Student extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
+    //DAYLY ATTENDANCE
+    
+    function attendance_report() {
+         $page_data['month']        = date('m');
+         $page_data['page_name']    = 'attendance_report';
+         $page_data['page_title']   = get_phrase('attendance_report');
+         $this->load->view('backend/index',$page_data);
+     }
     /* private messaging */
 
     function message($param1 = 'message_home', $param2 = '', $param3 = '') {
@@ -450,7 +458,7 @@ class Student extends CI_Controller
         $data['page_title']             = get_phrase('study_material');
         $this->load->view('backend/index', $data);
     }
-
+ 
     // MANAGE BOOK REQUESTS
     function book_request($param1 = "", $param2 = "")
     {

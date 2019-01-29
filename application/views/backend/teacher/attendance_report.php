@@ -2,12 +2,10 @@
 
 <?php echo form_open(base_url() . 'index.php?teacher/attendance_report_selector/'); ?>
 <div class="row">
-
     <?php
     $query = $this->db->where('teacher_id', $this->session->userdata('login_user_id'))->get('class');
     if ($query->num_rows() > 0):
         $class = $query->result_array();
-
         ?>
 
         <div class="col-md-3">
@@ -16,7 +14,7 @@
                 <select class="form-control selectboxit" name="class_id" onchange="select_section(this.value)">
                     <option value=""><?php echo get_phrase('select_class'); ?></option>
                     <?php foreach ($class as $row): ?>
-                    <option value="<?php echo $row['class_id']; ?>" ><?php echo $row['name']; ?></option>
+                        <option value="<?php echo $row['class_id']; ?>" ><?php echo $row['name']; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -35,7 +33,7 @@
         </div>
     </div>
     <div class="col-md-2">
-         <div class="form-group">
+        <div class="form-group">
             <label class="control-label" style="margin-bottom: 5px;"><?php echo get_phrase('month'); ?></label>
             <select name="month" class="form-control selectboxit">
                 <?php
@@ -66,22 +64,21 @@
                         $m = 'december';
                     ?>
                     <option value="<?php echo $i; ?>"
-                          <?php if($month == $i) echo 'selected'; ?>  >
+                            <?php if ($month == $i) echo 'selected'; ?>  >
                                 <?php echo get_phrase($m); ?>
                     </option>
                     <?php
                 endfor;
                 ?>
             </select>
-         </div>
+        </div>
     </div>
 
     <div class="col-md-2">
         <div class="form-group">
             <label class="control-label" style="margin-bottom: 5px;"><?php echo get_phrase('sessional_year'); ?></label>
             <select class="form-control selectboxit" name="sessional_year">
-                <?php
-                $sessional_year_options = explode('-', $running_year); ?>
+                <?php $sessional_year_options = explode('-', $running_year); ?>
                 <option value="<?php echo $sessional_year_options[0]; ?>"><?php echo $sessional_year_options[0]; ?></option>
                 <option value="<?php echo $sessional_year_options[1]; ?>"><?php echo $sessional_year_options[1]; ?></option>
             </select>
@@ -89,11 +86,11 @@
     </div>
 
     <input type="hidden" name="operation" value="selection">
-    <input type="hidden" name="year" value="<?php echo $running_year;?>">
+    <input type="hidden" name="year" value="<?php echo $running_year; ?>">
 
-	<div class="col-md-2" style="margin-top: 20px;">
-		<button type="submit" class="btn btn-info"><?php echo get_phrase('show_report');?></button>
-	</div>
+    <div class="col-md-2" style="margin-top: 20px;">
+        <button type="submit" class="btn btn-info"><?php echo get_phrase('show_report'); ?></button>
+    </div>
 </div>
 
 <?php echo form_close(); ?>

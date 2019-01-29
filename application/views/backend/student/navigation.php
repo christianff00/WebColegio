@@ -81,6 +81,19 @@
                 <span><?php echo get_phrase('academic_syllabus'); ?></span>
             </a>
         </li>
+        
+        <!-- DAILY ATTENDANCE -->
+        
+        <li class="<?php
+        if ($page_name == 'manage_attendance' ||
+                $page_name == 'manage_attendance_view' || $page_name == 'attendance_report' || $page_name == 'attendance_report_view')
+            echo 'opened active';
+        ?> ">
+            <a href="<?php echo base_url(); ?>index.php?student/attendance_report">
+                <i class="entypo-chart-area"></i>
+                <span><?php echo get_phrase('attendance'); ?></span>
+            </a>
+        </li>
 
         <!-- Exam marks -->
         <li class="<?php if ($page_name == 'student_marksheet') echo 'active'; ?> ">
